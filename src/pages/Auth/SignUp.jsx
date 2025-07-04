@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { BsPass } from "react-icons/bs";
+import { Link} from "react-router-dom"
 
 
 const SignUp = ()=>{
@@ -14,7 +14,7 @@ const SignUp = ()=>{
         confirmPassword:Yup.string().oneOf([Yup.ref("password"), null], "Passwords must match").required("Please confirm your password")
 
     })
-    return (<div className="signup-comtainer">
+    return (<div className="signup-container">
                 <div className="signup-card shadow p-4">
 
                     <h3 className="mb-4 text-center"> Sign Up </h3>
@@ -90,7 +90,9 @@ const SignUp = ()=>{
                             </Form>
                         )}
                     </Formik>
-
+                        <div className="text-center"><span>Already have an account?</span>
+                        <Link to="/login">Login</Link>
+                        </div>
                 </div>
 
     </div>)

@@ -6,7 +6,7 @@ import productRoutes from './routes/product.routes.js'
 dotenv.config()
 
 const app= express();
-const PORT = 5400;
+
 app.use(cors());
 app.use(express.json());
 
@@ -20,7 +20,7 @@ app.get("/", (req, res)=>{
 
 
 
-app.listen(PORT, ()=>{
+app.listen(process.env.PORT, ()=>{
     connectDB()
     console.log("server started at http://localhost:5400")
 })
