@@ -1,10 +1,14 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Link} from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { login } from "../../redux/actions/authActions"
 
 
 const Login = ()=>{
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const LoginSchema = Yup.object().shape({
         email: Yup.string().email("Please enter a valid email format").required("Email is required"),
@@ -15,16 +19,20 @@ const Login = ()=>{
 
                     <h3 className="mb-4 text-center"> Login </h3>
                     <Formik initialValues={{
-                        fullname: "",
                         email: "",
-                        phone: "",
-                        password: "",
-                        confirmPassword: "",
+                        password: ""
                     }}
                     validationSchema={LoginSchema}
-                    onSubmit={(values, {resetForm})=>{
+                    onSubmit={async (values, {setSubmitting, resetForm})=>{
                         console.log(values)
-                        resetForm();
+                        const success = await dispatch(login(values));
+
+                        if(success){
+                            resetForm();
+                            navigate("/product");
+                        }
+
+                        setSubmitting(false);
                     }}
                     >
                         {({isSubmitting})=>(

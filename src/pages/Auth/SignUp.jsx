@@ -1,15 +1,19 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Link} from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { signup } from "../../redux/actions/authActions"
+
 
 
 const SignUp = ()=>{
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const SignUpSchema = Yup.object().shape({
-        fullname: Yup.string().required("Full name is required"),
+        name: Yup.string().required("Full name is required"),
         email: Yup.string().email("Please enter a valid email format").required("Email is required"),
-        phone: Yup.string().matches(/^[0-9]{10,15}$/, "Phone number must be 10-15 numbers").required("Phone number is required"),
         password: Yup.string().min(6, "minimum 6 characters").required("Password is required"),
         confirmPassword:Yup.string().oneOf([Yup.ref("password"), null], "Passwords must match").required("Please confirm your password")
 
@@ -19,25 +23,32 @@ const SignUp = ()=>{
 
                     <h3 className="mb-4 text-center"> Sign Up </h3>
                     <Formik initialValues={{
-                        fullname: "",
+                        name: "",
                         email: "",
                         phone: "",
                         password: "",
                         confirmPassword: "",
                     }}
                     validationSchema={SignUpSchema}
-                    onSubmit={(values, {resetForm})=>{
+                    onSubmit={async (values, {setSubmitting, resetForm})=>{
                         console.log(values)
-                        resetForm();
+                        const success = await dispatch(signup(values));
+
+                        if(success){
+                            resetForm();
+                            navigate("/product");
+                        }
+
+                        setSubmitting(false);
                     }}
                     >
                         {({isSubmitting})=>(
                             <Form>
                                 <div className="mb-3">
                                 <label className="form-label">Full Name</label>
-                                <Field type="text" name="fullname" className="form-control"/>
+                                <Field type="text" name="name" className="form-control"/>
                                 <ErrorMessage
-                                    name="fullname"
+                                    name="name"
                                     component="div"
                                     className="text-danger"
                                 />
@@ -53,15 +64,6 @@ const SignUp = ()=>{
                                 />
                                 </div>
 
-                                <div className="mb-3">
-                                <label className="form-label">Phone Number</label>
-                                <Field type="text" name="phone" className="form-control"/>
-                                <ErrorMessage
-                                    name="phone"
-                                    component="div"
-                                    className="text-danger"
-                                />
-                                </div>
 
                             <div className="mb-3">
                                 <label className="form-label">Password</label>

@@ -79,7 +79,7 @@ function Product() {
                         </div>) : (
                         <Row className='g-4'>
                             {
-                                items.map((product) => (
+                                (Array.isArray(items) ? items : []).map((product) => (
                                     <Col key={product.id} xs={12} sm={6} md={3} lg={3}>
                                         <ProductCard 
                                         product={product} 

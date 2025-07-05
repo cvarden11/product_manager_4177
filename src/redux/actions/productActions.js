@@ -21,7 +21,7 @@ export const fetchProducts = () => async (dispatch) =>{
     dispatch({type: FETCH_PRODUCTS_REQUEST});
 
     try{
-        const res = await fetch("http://localhost:5400/api/products");
+        const res = await fetch("https://product-manager-4177.onrender.com/api/products");
         const data = await res.json()
         dispatch({type:FETCH_PRODUCTS_SUCCESS, payload: data});
     }catch(err){
@@ -35,7 +35,7 @@ export const addProducts = (product) => async (dispatch)=>{
     dispatch({type: CREATE_PRODUCTS_REQUEST});
 
     try{
-        const res = await fetch("http://localhost:5400/api/products",{
+        const res = await fetch("https://product-manager-4177.onrender.com/api/products",{
             method:"POST",
             headers: {"Content-Type": "application/json"},
             body:JSON.stringify(product),
@@ -56,7 +56,7 @@ export const updateProducts = (product) => async (dispatch)=>{
     dispatch({type: UPDATE_PRODUCTS_FAILURE});
 
     try{
-        const res = await fetch(`http://localhost:5400/api/products/${product.id}`,{
+        const res = await fetch(`https://product-manager-4177.onrender.com/api/products/${product.id}`,{
             method:"PUT",
             headers: {"Content-Type": "application/json"},
             body:JSON.stringify(product),
@@ -76,7 +76,7 @@ export const deleteProducts = (id) => async (dispatch)=>{
     dispatch({type: DELETE_PRODUCTS_REQUEST});
 
     try{
-        await fetch(`http://localhost:5400/api/products/${id}`,{
+        await fetch(`https://product-manager-4177.onrender.com/api/products/${id}`,{
             method:"DELETE",
         });
 
