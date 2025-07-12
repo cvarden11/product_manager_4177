@@ -55,6 +55,7 @@ export const login = (values) => async (dispatch) => {
                     email: values.email,
                     password: values.password,
                 }),
+                credentials: "include",
             }
         ); 
 

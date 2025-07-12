@@ -39,6 +39,7 @@ export const addProducts = (product) => async (dispatch)=>{
             method:"POST",
             headers: {"Content-Type": "application/json"},
             body:JSON.stringify(product),
+            credentials: "include",
         });
         const data = await res.json()
 
@@ -60,6 +61,7 @@ export const updateProducts = (product) => async (dispatch)=>{
             method:"PUT",
             headers: {"Content-Type": "application/json"},
             body:JSON.stringify(product),
+            credentials: "include",
         });
         const data = await res.json()
 
@@ -78,6 +80,7 @@ export const deleteProducts = (id) => async (dispatch)=>{
     try{
         await fetch(`https://product-manager-4177.onrender.com/api/products/${id}`,{
             method:"DELETE",
+            credentials: "include",
         });
 
         dispatch({type:DELETE_PRODUCTS_SUCCESS, payload: id});
