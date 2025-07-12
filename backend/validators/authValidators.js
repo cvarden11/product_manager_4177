@@ -16,10 +16,10 @@ export const validateRegister = [
 
     (req, res, next)=>{
         const errors = validationResult(req);
-        if(!error.isEmpty()){
+        if(!errors.isEmpty()){
             return res.status(400).json({
                 success:false,
-                error:error.array().map((err)=>({
+                error:errors.array().map((err)=>({
                     field: err.param,
                     message: err.msg
                 }))
