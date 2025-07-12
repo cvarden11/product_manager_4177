@@ -43,7 +43,6 @@ app.use(
     swaggerUiExpress.setup(swaggerSpec)
 )
 
-app.options('*', cors());
 
 
 app.use("/api/products", productRoutes)
