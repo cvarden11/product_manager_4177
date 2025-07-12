@@ -12,7 +12,7 @@ dotenv.config()
 
 const app= express();
 
-allowedOrigins = [
+const allowedOrigins = [
     "https://productmanager4177.netlify.app",
     "https://product-manager-4177.onrender.com"
 
@@ -29,7 +29,7 @@ app.use(cors({
     },
     methods:["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders:["Content-Type", "Authorization"],
-    credential: true,
+    credentials: true,
 }));
 
 
@@ -40,6 +40,7 @@ app.use(
     swaggerUiExpress.setup(swaggerSpec)
 )
 
+app.options('*', cors());
 
 
 app.use("/api/products", productRoutes)
