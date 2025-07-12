@@ -2,6 +2,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from "cors";
 import {connectDB} from './config/db.js'
+import swaggerUiExpress from "swagger-ui-express";
+import swaggerSpec from ".swagger/swagger.js"
+
 import productRoutes from './routes/product.routes.js'
 import authRoutes from './routes/auth.routes.js'
 
@@ -9,11 +12,33 @@ dotenv.config()
 
 const app= express();
 
+allowedOrigins = [
+    "https://localhost:5173",
+    "https://localhost:3000"
+
+]
+
 app.use(cors({
-    origin:['http://localhost:5173', 'https://localhost:3000'],
+    origin:function(origin, callback){
+        if(!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true)
+        } else{
+            return callback(new Error("Not allowed by CORS"))
+        }   
+    },
+    methods:["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders:["Content-Type", "Authorization"],
     credential: true,
 }));
+
+
 app.use(express.json());
+app.use(
+    "/api-docs",
+    swaggerUiExpress.serve,
+    swaggerUiExpress.setup(swaggerSpec)
+)
 
 
 

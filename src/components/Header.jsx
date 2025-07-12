@@ -1,12 +1,23 @@
 import '../App.css'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import  Button  from 'react-bootstrap/Button';
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function Header() {
+  const navigate = useNavigate();
+  const isLoggedIn = !!localStorage.getItem("token");
+
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  }
+
+
 
   return (
     <Navbar expand="lg" className='bg-body-tertiary'>
@@ -19,6 +30,7 @@ function Header() {
                     <Nav.Link href='/product'>Product</Nav.Link>
                     <Nav.Link href='/contact'>Contact</Nav.Link>
                 </Nav>
+                {isLoggedIn ?(<Button variant="outline-danger" onClick = {handleLogout}>Logout</Button>):(<Nav.Link href="/login"><Button variant="outline-success">Login</Button></Nav.Link>)}
             </Navbar.Collapse>
         </Container>
     </Navbar>

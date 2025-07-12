@@ -4,14 +4,14 @@ import { createProducts, deleteProduct, updateProducts, getProductById, getProdu
 
 const router = express.Router();
 
-router.get('/', authMiddleware, getProducts)
+router.get('/', authMiddleware, authorizeRoles("customer", "admin"), getProducts)
 
-router.get('/:id', authMiddleware, getProductById)
+router.get('/:id', authMiddleware, authorizeRoles( "admin"), getProductById)
 
-router.post("/", authMiddleware, createProducts)
+router.post("/", authMiddleware, authorizeRoles("admin"), createProducts)
 
-router.put("/:id", authMiddleware, updateProducts)
+router.put("/:id", authMiddleware, authorizeRoles("admin"), updateProducts)
 
-router.delete("/:id", authMiddleware, deleteProduct)
+router.delete("/:id", authMiddleware, authorizeRoles("admin"), deleteProduct)
 
 export default router;
