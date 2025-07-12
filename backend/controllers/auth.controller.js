@@ -27,6 +27,8 @@ const {email, password } = req.body;
 
 try{
     const user = await User.findOne({email});
+    console.log("Password in DB:", user.password);
+    console.log("Password from user:", password);
     if (!user) return res.status(404).json({message:"User not found"});
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({message:"Invalid Credentials"});
