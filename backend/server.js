@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import cors from "cors";
 import {connectDB} from './config/db.js'
 import swaggerUiExpress from "swagger-ui-express";
-import swaggerSpec from ".swagger/swagger.js"
+import swaggerSpec from "./swagger/swagger.js"
 
 import productRoutes from './routes/product.routes.js'
 import authRoutes from './routes/auth.routes.js'
@@ -25,7 +25,7 @@ const corsOptions = {
       console.log("✅ Allowed origin");
             return callback(null, true)
         } else{
-      console.warn("❌ Blocked by CORS:", origin);
+      console.log("❌ Blocked by CORS:", origin);
             return callback(new Error("Not allowed by CORS"))
         }   
     },
