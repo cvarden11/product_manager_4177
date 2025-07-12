@@ -14,7 +14,7 @@ const app= express();
 
 allowedOrigins = [
     "https://localhost:5173",
-    "https://localhost:3000"
+    "https://product-manager-4177.onrender.com"
 
 ]
 
