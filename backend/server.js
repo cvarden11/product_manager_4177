@@ -13,7 +13,7 @@ dotenv.config()
 const app= express();
 
 allowedOrigins = [
-    "https://localhost:5173",
+    "https://productmanager4177.netlify.app",
     "https://product-manager-4177.onrender.com"
 
 ]

@@ -12,19 +12,17 @@ function Hero() {
                     <Col md={6}>
                         <h1 className='display-4 fw-bold'>Welcome to ProdManage</h1>
                         <p className='lead'>
-                            Effortlessly manage yout products with our all-in-one tool. 
-                            Create, view, edit, and delete products - fast, simple, and 
-                            reliable.
+                           Upload Products for users to see
                         </p>
                         <Link to='/product'>
-                            <Button variable='light' size='lg' className='mt-3'>
-                                Explore Products
+                            <Button  size='lg' className='mt-3'>
+                                Products
                             </Button>
                         </Link>
                     </Col>
                     <Col md={6}>
                         <img
-                        src='https://cdn-icons-png.flaticon.com/512/1533/1533926.png'
+                        src='https://bloomidea.com/sites/default/files/styles/og_image/public/blog/Porque%20deve%20ter%20uma%20loja%20online_0.png?itok=lxdmtNZE'
                         alt='Product illustration'                        
                         className='img-fluid mt-4 mt-md-0'/>
                     </Col>
